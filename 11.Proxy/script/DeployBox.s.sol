@@ -1,4 +1,4 @@
-//SPDX-License-Identifier
+//SPDX-License-Identifier:MIT
 
 pragma solidity ^0.8.24;
 
@@ -16,6 +16,7 @@ contract DeployBox is Script {
         vm.startBroadcast();
         BoxV1 box = new BoxV1();
         ERC1967Proxy proxy = new ERC1967Proxy(address(box), "");
+        BoxV1(address(proxy)).initialize();
         vm.stopBroadcast();
         return address(proxy);
     }
